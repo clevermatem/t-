@@ -1,4 +1,4 @@
-IncludeFile("Lib\SDK.lua")
+IncludeFile("Lib\\SDK.lua")
 class "Singed"
 local version = 0.1
 local developer="Pinggin_friend"
