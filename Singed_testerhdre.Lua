@@ -1,5 +1,5 @@
-IncludeFile("Lib\\TOIR_SDK.lua")
-Singed=  class()
+IncludeFile("Lib\SDK.lua")
+class "Singed"
 local version = 0.1
 local developer="Pinggin_friend"
 function OnLoad()
@@ -43,10 +43,10 @@ self.languagetab={self.english,self.portuguese,self.chinese,self.vietnamese,self
 
     SetLuaHarass(true)
     SetLuaLaneClear(true)
-    self.Q = Spell(_Q)
-    self.W = Spell(_W,1000)
-    self.E = Spell(_E)
-    self.R = Spell(_R)
+    self.Q = Spell({Slot = 0,SpellType =Enum.SpellType.Active,Range = 900})
+    self.W = Spell({Slot = 1,SpellType = Enum.SpellType.SkillShot,range=1000,SkillShotType = Enum.SkillShotType.Circle})
+    self.E = Spell({Slot = 2,SpellType = Enum.SpellType.Targetted})
+    self.R = Spell({Slot = 3,SpellType =Enum.SpellType.Active})
 
     self.NoVision = {}
     self.LastSeenTime = {}
@@ -77,6 +77,10 @@ self.languagetab={self.english,self.portuguese,self.chinese,self.vietnamese,self
 
     self.your_enemies=self:GetEnemies()
 
+
+    AddEvent(Enum.Event.OnTick, function(...) self:OnTick(...) end)
+
+    AddEvent(Enum.Event.OnProcessSpell, function(...) self:OnProcessSpell(...) end)
 
     self:SetDefault()
 
